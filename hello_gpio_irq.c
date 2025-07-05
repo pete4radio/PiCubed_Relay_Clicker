@@ -16,6 +16,8 @@
 #error "Recompile specifying the RP2350B platform SAMWISE"
 #endif
 
+#define ENAB_BURN_A_GPIO 36 // GPIO pin for enabling the "burn wire"
+#define ENAB_BURN_B_GPIO 35 // GPIO pin for enabling the "burn wire"
 
 static char event_str[128];
 
@@ -41,12 +43,25 @@ int main() {
     gpio_set_dir(RELAY_GPIO, GPIO_OUT);
     
     while (1){
-        // set the GPIO 44 Low, wait 1 second, and set it high
+        // set the GPIO 44 Low, wait 5 seconds, and set it high
         gpio_put(RELAY_GPIO, 0);
-        sleep_ms(1000);
+        sleep_ms(5000);
         gpio_put(RELAY_GPIO, 1);
+        // Turn on enable burn wire A for 1 second, turn it off
+        gpio_init(ENAB_BURN_A_GPIO);
+        gpio_set_dir(ENAB_BURN_A_GPIO, GPIO_OUT);
+        gpio_put(ENAB_BURN_A_GPIO, 1);
+        printf(" Burn Wire A is on ...");
+        sleep_ms(1000);
+        gpio_put(ENAB_BURN_A_GPIO, 0);
+        // Turn on enable burn wire B for 1 second, turn it off
+        gpio_init(ENAB_BURN_B_GPIO);
+        gpio_set_dir(ENAB_BURN_B_GPIO, GPIO_OUT);
+        gpio_put(ENAB_BURN_B_GPIO, 1);
+        printf(" Burn Wire B is on\n");
+        sleep_ms(1000);
+        gpio_put(ENAB_BURN_B_GPIO, 0);
         printf(".");
-         sleep_ms(1000);
     }
 }
 
