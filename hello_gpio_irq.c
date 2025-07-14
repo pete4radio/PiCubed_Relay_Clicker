@@ -47,19 +47,19 @@ int main() {
         gpio_put(RELAY_GPIO, 0);
         sleep_ms(5000);
         gpio_put(RELAY_GPIO, 1);
-        // Turn on enable burn wire A for 1 second, turn it off
+        // Turn on enable burn wire A for 5 second, turn it off
         gpio_init(ENAB_BURN_A_GPIO);
         gpio_set_dir(ENAB_BURN_A_GPIO, GPIO_OUT);
         gpio_put(ENAB_BURN_A_GPIO, 1);
         printf(" Burn Wire A is on ...");
-        sleep_ms(1000);
+        sleep_ms(5000);
         gpio_put(ENAB_BURN_A_GPIO, 0);
-        // Turn on enable burn wire B for 1 second, turn it off
+        // Turn on enable burn wire B for 5 second, turn it off
         gpio_init(ENAB_BURN_B_GPIO);
         gpio_set_dir(ENAB_BURN_B_GPIO, GPIO_OUT);
         gpio_put(ENAB_BURN_B_GPIO, 1);
         printf(" Burn Wire B is on\n");
-        sleep_ms(1000);
+        sleep_ms(5000);
         gpio_put(ENAB_BURN_B_GPIO, 0);
         printf(".");
     }
